@@ -4,8 +4,12 @@ import React from 'react'
 import Confetti from 'react-confetti'
 import './App.css'
 import Column from './Column.jsx'
+import { render } from 'react-dom'
 
 function App() {
+
+  console.log("App render")
+  
   const [columns, setColumns] = 
     useState([[],[],[],[],[],[]])
   const [score,setScore]=useState({aiScore:0,playerScore:0})
@@ -17,11 +21,15 @@ function App() {
   const [winner,SetWinner]=useState("No")
 
   React.useEffect(()=>{
+    
     if (checkEndGame(columns) && score.playerScore>score.aiScore){
       SetWinner("player")
     }
     else {
-      SetWinner("No")
+      if(checkEndGame(columns) && score.aiScore>=score.playerScore){
+        SetWinner("No")
+      }
+      
     }
   },[columns])
 
