@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import React from 'react'
+import Confetti from 'react-confetti'
 import './App.css'
 import Column from './Column.jsx'
 
@@ -11,6 +13,17 @@ function App() {
   const size=3
   
   const [diceRoll,setDiceRoll]=useState(Math.floor(Math.random()*6)+1)
+
+  const [winner,SetWinner]=useState("No")
+
+  React.useEffect(()=>{
+    if (checkEndGame(columns) && score.playerScore>score.aiScore){
+      SetWinner("player")
+    }
+    else {
+      SetWinner("No")
+    }
+  },[columns])
 
   function placeDice(i){
     if(checkEndGame(columns)){
@@ -33,6 +46,7 @@ function App() {
     console.log(columns)
     setDiceRoll(Math.floor(Math.random()*6)+1)
     setScore(calculatePoints(newValue)) 
+    
   }
 
 
@@ -132,6 +146,7 @@ function App() {
 
   return (
     <div className="App">
+      {winner==="player" && <Confetti/>}
       <div className='score'>{"Ai score: "+score.aiScore}</div>
       <div className="field" id="cpu">
         <Column size={3} values={columns[0]} />
