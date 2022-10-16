@@ -19,11 +19,11 @@
   border: 2px solid #73AD21;
 }
 
-.column:hover{
+.field#player>.column:hover{
   border: 2px solid #FFBF00;
 }
 
-.column:active{
+.field#player>.column:active{
   border: 2px solid #0015ff;
 }
 
